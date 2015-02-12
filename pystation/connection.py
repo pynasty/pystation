@@ -3,13 +3,13 @@ logger = logging.getLogger(__name__)
 
 from requests import HTTPError
 
-import requests
+import requests as r_requests
 import json
 
-base_url = 'https://shipstation.p.mashape.com'
+base_url = 'https://ssapi.shipstation.com'
 
 def request(method, url, **kwargs):
-    res = requests.request(method, url, **kwargs)
+    res = r_requests.request(method, url, **kwargs)
     res.connection.close()
 
     return res
@@ -20,16 +20,14 @@ class APIResult(object):
         self.message = message
         self.response = response
 
-class ShipstaionAPI(object):
-    def __init__(self, api_user, api_secret, mashape_key):
+class ShipstationAPI(object):
+    def __init__(self, api_user, api_secret):
         self.api_user = api_user
         self.api_secret = api_secret
-        self.mashape_key = mashape_key
 
     def api_call(self, url, method, valid_codes, **kwargs):
         try:
             headers = kwargs.get('headers', {})
-            headers['X-Mashape-Key'] = self.mashape_key
             headers['Content-Type'] = 'application/json'
             kwargs['headers'] = headers
 
