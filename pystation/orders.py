@@ -15,7 +15,8 @@ class ShipStationOrders(ShipstationAPI):
             status_codes={200, 201, 204})
 
     def create_order(self, **kwargs):
-        return self.base_post(kwargs, '/Orders/CreateOrder')
+        return self.base_post(kwargs, '/Orders/CreateOrder',
+            status_codes={200, 201, 204})
 
     def delete_order(self):
         pass
@@ -24,7 +25,8 @@ class ShipStationOrders(ShipstationAPI):
         return self.base_get('/Orders/' + order_id)
         
     def hold_until(self, **kwargs):
-        return self.base_post(kwargs, '/Orders/HoldUntil')
+        return self.base_post(kwargs, '/Orders/HoldUntil',
+            status_codes={200, 201, 204})
 
     def list_orders(self, **kwargs):
         params = parse.urlencode(kwargs)
@@ -35,7 +37,9 @@ class ShipStationOrders(ShipstationAPI):
         return self.base_get('/Orders/ListByTag?' + params)
 
     def mark_order_as_shipped(self, **kwargs):
-        return self.base_post(kwargs, '/Orders/MarkAsShipped')
+        return self.base_post(kwargs, '/Orders/MarkAsShipped',
+            status_codes={200, 201, 204})
 
     def remove_tag(self, **kwargs):
-        return self.base_post(kwargs, '/Orders/RemoveTag')
+        return self.base_post(kwargs, '/Orders/RemoveTag',
+            status_codes={200, 201, 204})
